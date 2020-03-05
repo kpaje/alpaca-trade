@@ -52,6 +52,7 @@ client.onStockAggMin(function(subject, data) {
 });
 client.connect();
 
+// https://docs.alpaca.markets/api-documentation/how-to/market-data/
 // Apple Stocks
 alpaca
 	.getBars("day", "AAPL", {
@@ -83,3 +84,24 @@ alpaca
 
 		console.log(`TSLA moved ${percent_change}% over the last 5 days`);
 	});
+
+// Get a list of all active assets.
+// const activeAssets = alpaca
+// 	.getAssets({
+// 		status: "active"
+// 	})
+// 	.then(activeAssets => {
+// 		// Filter the assets down to just those on NASDAQ.
+// 		const nasdaqAssets = activeAssets.filter(
+// 			asset => asset.exchange == "NASDAQ"
+// 		);
+// 		console.log(nasdaqAssets);
+// 	});
+
+// https://docs.alpaca.markets/api-documentation/how-to/assets/
+// Check if AAPL is tradable on the Alpaca platform.
+alpaca.getAsset("AAPL").then(aaplAsset => {
+	if (aaplAsset.tradable) {
+		console.log("We can trade AAPL.");
+	}
+});
